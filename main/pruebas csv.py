@@ -10,9 +10,7 @@ encendido = json_store_path + "Encendido.csv"
 
 with open(apagado, newline='') as csvfile:
     reader = csv.reader(csvfile)
-    for row in reader:
-        print(row)
 
-"""matrix = np.loadtxt(apagado, delimiter=',')
+matrix = np.loadtxt(encendido, delimiter=',')
 for row in matrix:
-    print(row)"""
+    print(row)
