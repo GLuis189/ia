@@ -50,7 +50,7 @@ def bellman():
     for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
         suma_off = C2_APAGADO
-        if i != 11:
+        if i != 12:
             for j in range(len(matrix_on[i])-1):
                 if j != 0:
                     if matrix_on[i][j] != 0:
@@ -67,7 +67,6 @@ def calcular_v():
     fin = True
     while fin:
         if matrix_v[0][-1] == matrix_v[0][-2]:
-            printm(matrix_v)
             fin = False
         else:
             bellman()
@@ -78,4 +77,10 @@ with open(vfile, "w", newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
     for row in matrix_v:
         writer.writerow(row)
+
+matrix_vf =[]
+for i in range(len(matrix_v)):
+    matrix_vf.append([matrix_v[i][0],matrix_v[i][-1]])
+
+printm(matrix_vf)
 
