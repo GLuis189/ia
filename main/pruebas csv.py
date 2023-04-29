@@ -30,12 +30,8 @@ tofloat(matrix_off)
 
 with open(vfile, "w", newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
-    b = True
     for row in matrix_on:
-        if b:
-            b = False
-        else:
-            writer.writerow([row[0], 0])
+        writer.writerow([row[0], 0])
 
 with open(vfile, "r", newline='') as csvfile:
     reader = csv.reader(csvfile)
@@ -51,16 +47,16 @@ print("Matriz V ----------------------------------------")
 printm(matrix_v)"""
 
 def bellman():
-    for i in range(len(matrix_on)-1):
+    for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
         suma_off = C2_APAGADO
-        if i != 12:
+        if i != 11:
             for j in range(len(matrix_on[i])-1):
                 if j != 0:
                     if matrix_on[i][j] != 0:
-                        suma_on += matrix_on[i][j] * matrix_v[i][-1]
+                        suma_on += matrix_on[i][j] * matrix_v[j][-1]
                     if matrix_off[i][j] != 0:
-                        suma_off += matrix_off[i][j] * matrix_v[i][-1]
+                        suma_off += matrix_off[i][j] * matrix_v[j][-1]
             v = min(suma_on, suma_off)
             matrix_v[i].append(v)
         else:
@@ -77,4 +73,9 @@ def calcular_v():
             bellman()
 
 calcular_v()
+
+with open(vfile, "w", newline='') as csvfile:
+    writer = csv.writer(csvfile, delimiter=',')
+    for row in matrix_v:
+        writer.writerow(row)
 
