@@ -18,11 +18,11 @@ def tofloat(matrix):
 
 with open(apagado, "r", newline='') as csvfile:
     reader = csv.reader(csvfile)
-    matrix_on = list(reader)
+    matrix_off = list(reader)
 
 with open(encendido, "r", newline='') as csvfile:
     reader = csv.reader(csvfile)
-    matrix_off = list(reader)
+    matrix_on = list(reader)
 
 tofloat(matrix_on)
 tofloat(matrix_off)
@@ -78,7 +78,7 @@ with open(vfile, "w", newline='') as csvfile:
 
 #printm(matrix_v)
 
-v_final =[]
+v_final = []
 for i in range(len(matrix_v)):
     v_final.append(matrix_v[i][-1])
 
@@ -95,9 +95,9 @@ def politica(v_final):
             if matrix_off[i][j] != 0:
                 suma_off += matrix_off[i][j] * v_final[j]
         if suma_on<suma_off:
-            politica.append("Off")
-        elif suma_on>suma_off:
             politica.append("On")
+        elif suma_on>suma_off:
+            politica.append("Off")
         """elif suma_on==suma_off and suma_on != 0:
             if C_ENCENDIDO<C2_APAGADO:
                 politica.append("On")
