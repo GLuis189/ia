@@ -57,7 +57,7 @@ def bellman():
                         suma_on += matrix_on[i][j] * matrix_v[j][-1]
                     if matrix_off[i][j] != 0:
                         suma_off += matrix_off[i][j] * matrix_v[j][-1]
-            v = min(suma_on, suma_off)
+            v = round(min(suma_on, suma_off),2)
             matrix_v[i].append(v)
         else:
             matrix_v[i].append(0)
