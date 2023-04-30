@@ -1,5 +1,4 @@
 import csv
-import numpy as np
 from pathlib import Path
 
 csv_store_path = str(Path.home()) + r"\PycharmProjects\ia\csv/"
@@ -39,25 +38,24 @@ with open(vfile, "r", newline='') as csvfile:
 
 tofloat(matrix_v)
 
-"""print("Matriz ON  ----------------------------------------")
+print("Matriz ON  ----------------------------------------")
 printm(matrix_on)
 print("Matriz OFF ----------------------------------------")
 printm(matrix_off)
 print("Matriz V ----------------------------------------")
-printm(matrix_v)"""
+printm(matrix_v)
 
 def bellman():
     for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
         suma_off = C2_APAGADO
         if i != 12:
-            for j in range(len(matrix_on[i])-1):
-                if j != 0:
-                    if matrix_on[i][j] != 0:
-                        suma_on += matrix_on[i][j] * matrix_v[j][-1]
-                    if matrix_off[i][j] != 0:
-                        suma_off += matrix_off[i][j] * matrix_v[j][-1]
-            v = round(min(suma_on, suma_off),2)
+            for j in range(len(matrix_on[i])):
+                if matrix_on[i][j] != 0:
+                    suma_on += matrix_on[i][j] * matrix_v[j][-1]
+                if matrix_off[i][j] != 0:
+                    suma_off += matrix_off[i][j] * matrix_v[j][-1]
+            v = round(min(suma_on, suma_off), 3)
             matrix_v[i].append(v)
         else:
             matrix_v[i].append(0)
@@ -78,9 +76,11 @@ with open(vfile, "w", newline='') as csvfile:
     for row in matrix_v:
         writer.writerow(row)
 
+printm(matrix_v)
+
 matrix_vf =[]
 for i in range(len(matrix_v)):
     matrix_vf.append([matrix_v[i][0],matrix_v[i][-1]])
 
-printm(matrix_vf)
+#printm(matrix_vf)
 
