@@ -98,11 +98,7 @@ def politica(v_final):
             politica.append("On")
         elif suma_on>suma_off:
             politica.append("Off")
-        """elif suma_on==suma_off and suma_on != 0:
-            if C_ENCENDIDO<C2_APAGADO:
-                politica.append("On")
-            else:
-                politica.append("Off")"""
+
 
     return politica
 
