@@ -38,12 +38,12 @@ with open(vfile, "r", newline='') as csvfile:
 
 tofloat(matrix_v)
 
-print("Matriz ON  ----------------------------------------")
+"""print("Matriz ON  ----------------------------------------")
 printm(matrix_on)
 print("Matriz OFF ----------------------------------------")
 printm(matrix_off)
 print("Matriz V ----------------------------------------")
-printm(matrix_v)
+printm(matrix_v)"""
 
 def bellman():
     for i in range(len(matrix_on)):
@@ -76,11 +76,35 @@ with open(vfile, "w", newline='') as csvfile:
     for row in matrix_v:
         writer.writerow(row)
 
-printm(matrix_v)
+#printm(matrix_v)
 
-matrix_vf =[]
+v_final =[]
 for i in range(len(matrix_v)):
-    matrix_vf.append([matrix_v[i][0],matrix_v[i][-1]])
+    v_final.append(matrix_v[i][-1])
 
-#printm(matrix_vf)
+print(v_final)
+
+def politica(v_final):
+    politica = []
+    for i in range(len(matrix_on)):
+        suma_on = C_ENCENDIDO
+        suma_off = C2_APAGADO
+        for j in range(len(matrix_on[i])):
+            if matrix_on[i][j] != 0:
+                suma_on += matrix_on[i][j] * v_final[j]
+            if matrix_off[i][j] != 0:
+                suma_off += matrix_off[i][j] * v_final[j]
+        if suma_on<suma_off:
+            politica.append("Off")
+        elif suma_on>suma_off:
+            politica.append("On")
+        """elif suma_on==suma_off and suma_on != 0:
+            if C_ENCENDIDO<C2_APAGADO:
+                politica.append("On")
+            else:
+                politica.append("Off")"""
+
+    return politica
+
+print(politica(v_final))
 
