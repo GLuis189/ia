@@ -30,7 +30,7 @@ tofloat(matrix_off)
 matrix_v = []
 i= 0
 for row in matrix_on:
-    matrix_v.append([16 + i, 0.0])
+    matrix_v.append([16.0 + i, 0.0])
     i += 0.5
 
 """print("Matriz ON  ----------------------------------------")
@@ -71,7 +71,7 @@ with open(vfile, "w", newline='') as csvfile:
     for row in matrix_v:
         writer.writerow(row)
 
-printm(matrix_v)
+#printm(matrix_v)
 
 v_final = []
 for i in range(len(matrix_v)):
