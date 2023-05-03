@@ -5,8 +5,8 @@ csv_store_path = str(Path.home()) + r"\PycharmProjects\ia\csv/"
 apagado = csv_store_path + "Apagado.csv"
 encendido = csv_store_path + "Encendido.csv"
 vfile = csv_store_path + "vfile.csv"
-C_ENCENDIDO = 1
-C2_APAGADO = 1
+C_ENCENDIDO = 5
+C2_APAGADO = 0.5
 def printm(matrix):
     for row in matrix:
         print(row)
@@ -55,7 +55,7 @@ def bellman():
                     suma_on += matrix_on[i][j] * matrix_v[j][-1]
                 if matrix_off[i][j] != 0:
                     suma_off += matrix_off[i][j] * matrix_v[j][-1]
-            v = round(min(suma_on, suma_off), 3)
+            v = round(min(suma_on, suma_off), 1)
             matrix_v[i].append(v)
         else:
             matrix_v[i].append(0)
@@ -98,7 +98,6 @@ def politica(v_final):
             politica.append("On")
         elif suma_on>suma_off:
             politica.append("Off")
-
 
     return politica
 
