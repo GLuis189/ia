@@ -6,7 +6,7 @@ apagado = csv_store_path + "Apagado.csv"
 encendido = csv_store_path + "Encendido.csv"
 vfile = csv_store_path + "vfile.csv"
 C_ENCENDIDO = 1
-C2_APAGADO = 1
+C_APAGADO = 1
 def printm(matrix):
     for row in matrix:
         print(row)
@@ -43,7 +43,7 @@ printm(matrix_v)"""
 def bellman():
     for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
-        suma_off = C2_APAGADO
+        suma_off = C_APAGADO
         if i != 12:
             for j in range(len(matrix_on[i])):
                 if matrix_on[i][j] != 0:
@@ -76,14 +76,13 @@ with open(vfile, "w", newline='') as csvfile:
 v_final = []
 for i in range(len(matrix_v)):
     v_final.append(matrix_v[i][-1])
-
 print(v_final)
 
 def politica(v_final):
     politica = []
     for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
-        suma_off = C2_APAGADO
+        suma_off = C_APAGADO
         for j in range(len(matrix_on[i])):
             if matrix_on[i][j] != 0:
                 suma_on += matrix_on[i][j] * v_final[j]
