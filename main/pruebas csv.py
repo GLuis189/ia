@@ -5,8 +5,8 @@ csv_store_path = str(Path.home()) + r"\PycharmProjects\ia\csv/"
 apagado = csv_store_path + "Apagado.csv"
 encendido = csv_store_path + "Encendido.csv"
 vfile = csv_store_path + "vfile.csv"
-C_ENCENDIDO = 5
-C2_APAGADO = 0.5
+C_ENCENDIDO = 1
+C2_APAGADO = 1
 def printm(matrix):
     for row in matrix:
         print(row)
@@ -27,16 +27,11 @@ with open(encendido, "r", newline='') as csvfile:
 tofloat(matrix_on)
 tofloat(matrix_off)
 
-with open(vfile, "w", newline='') as csvfile:
-    writer = csv.writer(csvfile, delimiter=',')
-    for row in matrix_on:
-        writer.writerow([row[0], 0])
-
-with open(vfile, "r", newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    matrix_v = list(reader)
-
-tofloat(matrix_v)
+matrix_v = []
+i= 0
+for row in matrix_on:
+    matrix_v.append([16 + i, 0.0])
+    i += 0.5
 
 """print("Matriz ON  ----------------------------------------")
 printm(matrix_on)
@@ -76,7 +71,7 @@ with open(vfile, "w", newline='') as csvfile:
     for row in matrix_v:
         writer.writerow(row)
 
-#printm(matrix_v)
+printm(matrix_v)
 
 v_final = []
 for i in range(len(matrix_v)):
