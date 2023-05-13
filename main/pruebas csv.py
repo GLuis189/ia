@@ -1,4 +1,5 @@
 import csv
+import random as rnd
 from pathlib import Path
 
 csv_store_path = str(Path.home()) + r"\PycharmProjects\ia\csv/"
@@ -105,4 +106,71 @@ print("-------------------------------------------------------------------")
 for i in range(len(politica)):
     print("Si hace " + str(16+0.5*i) + "º, el termostato debería hacer la acción: " + str(politica[i]) + ".")
 
+print("-------------------------------------------------------------------")
+
+temperatura = None
+while not isinstance(temperatura, float):
+    try:
+        temperatura = float(input("Introduce la temperatura que hace: "))
+    except:
+        print("La temperatura debe ser un flotante.")
+
+excepcion = 0
+ventana = str(input("¿Quiere introducir el caso de que se pueda abrir una ventana aleatoriamente? (S/N): "))
+while ventana != "S" and ventana != "N":
+    print("Responde S o N")
+    ventana = str(input("¿Quiere introducir el caso de que se pueda abrir una ventana aleatoriamente? (S/N): "))
+if ventana == "S":
+    calor = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
+    while calor != "F" and calor != "C":
+        print("Responde F o C")
+        calor = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
+    if calor == "F":
+        excepcion = -3
+    if calor == "C":
+        excepcion = 3
+
+
+
+def cambio_temp(estado, matriz):
+    probabilidad = []
+    estados = []
+    for i in range(len(matriz[estado])):
+        if matriz[estado][i] != 0:
+            probabilidad.append(matriz[estado][i])
+            estados.append(i)
+    return rnd.choices(estados, weights=probabilidad)[0]
+
+def simular(temperatura, ventana, excepcion):
+    if temperatura == 22.0:
+        print("Se ha alcanzado la temperatura ideal.")
+        return
+    if temperatura<16.0 or temperatura>25.0:
+        print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
+    if ventana == "S":
+        if excepcion == -3 and temperatura >= 19:
+            if rnd.random() < 0.05:
+                print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 3 grados")
+                temperatura -= 3
+        if excepcion == 3 and  temperatura <= 22:
+            if rnd.random() < 0.1:
+                print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 3 grados")
+                temperatura += 3
+    estado = 0
+    for i in range(len(politica)):
+        if temperatura == 16+i*0.5:
+            estado = i
+    accion = politica[estado]
+    matriz = None
+    if accion == "On":
+        matriz = matrix_on
+    else:
+        matriz = matrix_off
+    temperatura2 = 16 + cambio_temp(estado, matriz) * 0.5
+    print("Hace " + str(temperatura) + "º, por lo que el termostato toma la acción " + str(accion) + " y pasa a " + str(temperatura2) + "º.")
+    return simular(temperatura2, ventana, excepcion)
+
+simular(temperatura, ventana, excepcion)
+
+print("-------------------------------------------------------------------")
 
