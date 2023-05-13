@@ -142,6 +142,7 @@ def simular(temperatura,excepcion):
         return
     if temperatura<16.0 or temperatura>25.0:
         print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
+        return
     if ventana != 0:
         if excepcion == "F" and temperatura >= 18:
             if rnd.random() < 0.05:
