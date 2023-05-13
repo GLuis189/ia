@@ -5,7 +5,7 @@ csv_store_path = str(Path.home()) + r"\PycharmProjects\ia\csv/"
 apagado = csv_store_path + "Apagado.csv"
 encendido = csv_store_path + "Encendido.csv"
 vfile = csv_store_path + "vfile.csv"
-C_ENCENDIDO = 2
+C_ENCENDIDO = 2.0
 C_APAGADO = 0.5
 def printm(matrix):
     for row in matrix:
@@ -76,10 +76,12 @@ with open(vfile, "w", newline='') as csvfile:
 v_final = []
 for i in range(len(matrix_v)):
     v_final.append(matrix_v[i][-1])
+print("-------------------------------------------------------------------")
+print("Los valores V estabilizados son: ")
 print(v_final)
 
-def politica(v_final):
-    politica = []
+politica = []
+def c_politica(v_final):
     for i in range(len(matrix_on)):
         suma_on = C_ENCENDIDO
         suma_off = C_APAGADO
@@ -93,7 +95,14 @@ def politica(v_final):
         elif suma_on>suma_off:
             politica.append("Off")
 
-    return politica
+c_politica(v_final)
 
-print(politica(v_final))
+print("-------------------------------------------------------------------")
+print("La política óptima es: ")
+print(politica)
+
+print("-------------------------------------------------------------------")
+for i in range(len(politica)):
+    print("Si hace " + str(16+0.5*i) + "º, el termostato debería hacer la acción: " + str(politica[i]) + ".")
+
 
