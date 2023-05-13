@@ -108,8 +108,8 @@ for i in range(len(politica)):
 
 print("-------------------------------------------------------------------")
 
-temperatura = None
-while not isinstance(temperatura, float):
+temperatura = 0
+while not isinstance(temperatura, float) or (temperatura * 10) % 5 != 0:
     try:
         temperatura = float(input("Introduce la temperatura que hace: "))
     except:
@@ -149,7 +149,7 @@ def simular(temperatura,excepcion):
                 print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 2 grados")
                 temperatura -= 2
         if excepcion == "C" and temperatura <= 23:
-            if rnd.random() < 0.1:
+            if rnd.random() < 0.05:
                 print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 2 grados")
                 temperatura += 2
     estado = 0
@@ -164,9 +164,9 @@ def simular(temperatura,excepcion):
         matriz = matrix_off
     temperatura2 = 16 + cambio_temp(estado, matriz) * 0.5
     print("Hace " + str(temperatura) + "º, por lo que el termostato toma la acción " + str(accion) + " y pasa a " + str(temperatura2) + "º.")
-    return simular(temperatura2, ventana)
+    return simular(temperatura2, excepcion)
 
-simular(temperatura, ventana)
+simular(temperatura, excepcion)
 
 print("-------------------------------------------------------------------")
 
