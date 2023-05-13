@@ -121,15 +121,10 @@ while ventana != "S" and ventana != "N":
     print("Responde S o N")
     ventana = str(input("¿Quiere introducir el caso de que se pueda abrir una ventana aleatoriamente? (S/N): "))
 if ventana == "S":
-    calor = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
-    while calor != "F" and calor != "C":
+    excepcion = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
+    while excepcion != "F" and excepcion != "C":
         print("Responde F o C")
-        calor = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
-    if calor == "F":
-        excepcion = -2
-    if calor == "C":
-        excepcion = 2
-
+        excepcion = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
 
 
 def cambio_temp(estado, matriz):
@@ -141,20 +136,20 @@ def cambio_temp(estado, matriz):
             estados.append(i)
     return rnd.choices(estados, weights=probabilidad)[0]
 
-def simular(temperatura, ventana, excepcion):
+def simular(temperatura,excepcion):
     if temperatura == 22.0:
         print("Se ha alcanzado la temperatura ideal.")
         return
     if temperatura<16.0 or temperatura>25.0:
         print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
-    if ventana == "S":
-        if excepcion == -2 and temperatura >= 18:
+    if ventana != 0:
+        if excepcion == "F" and temperatura >= 18:
             if rnd.random() < 0.05:
-                print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 3 grados")
+                print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 2 grados")
                 temperatura -= 2
-        if excepcion == 2 and  temperatura <= 23:
+        if excepcion == "C" and temperatura <= 23:
             if rnd.random() < 0.1:
-                print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 3 grados")
+                print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 2 grados")
                 temperatura += 2
     estado = 0
     for i in range(len(politica)):
@@ -168,9 +163,9 @@ def simular(temperatura, ventana, excepcion):
         matriz = matrix_off
     temperatura2 = 16 + cambio_temp(estado, matriz) * 0.5
     print("Hace " + str(temperatura) + "º, por lo que el termostato toma la acción " + str(accion) + " y pasa a " + str(temperatura2) + "º.")
-    return simular(temperatura2, ventana, excepcion)
+    return simular(temperatura2, ventana)
 
-simular(temperatura, ventana, excepcion)
+simular(temperatura, ventana)
 
 print("-------------------------------------------------------------------")
 
