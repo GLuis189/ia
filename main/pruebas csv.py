@@ -126,9 +126,9 @@ if ventana == "S":
         print("Responde F o C")
         calor = str(input("¿Hace frío o calor fuera de la casa? (F/C): "))
     if calor == "F":
-        excepcion = -3
+        excepcion = -2
     if calor == "C":
-        excepcion = 3
+        excepcion = 2
 
 
 
@@ -148,14 +148,14 @@ def simular(temperatura, ventana, excepcion):
     if temperatura<16.0 or temperatura>25.0:
         print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
     if ventana == "S":
-        if excepcion == -3 and temperatura >= 19:
+        if excepcion == -2 and temperatura >= 18:
             if rnd.random() < 0.05:
                 print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 3 grados")
-                temperatura -= 3
-        if excepcion == 3 and  temperatura <= 22:
+                temperatura -= 2
+        if excepcion == 2 and  temperatura <= 23:
             if rnd.random() < 0.1:
                 print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 3 grados")
-                temperatura += 3
+                temperatura += 2
     estado = 0
     for i in range(len(politica)):
         if temperatura == 16+i*0.5:
