@@ -149,7 +149,7 @@ def simular(temperatura,excepcion):
     if temperatura == 22.0:
         print("Se ha alcanzado la temperatura ideal.")
         return
-    if not 16.0 < temperatura < 25.0:
+    if not 16.0 <= temperatura <= 25.0:
         print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
         return
     if ventana != 0:
