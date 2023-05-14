@@ -109,9 +109,18 @@ for i in range(len(politica)):
 print("-------------------------------------------------------------------")
 
 temperatura = 0
-while not isinstance(temperatura, float) or (temperatura * 10) % 5 != 0:
+while not isinstance(temperatura, float):
     try:
         temperatura = float(input("Introduce la temperatura que hace: "))
+        if (temperatura * 10) % 5 != 0 and 16.0 < temperatura < 25.0:
+            decimal = temperatura - int(temperatura)
+            if 0.25 < decimal < 0.75:
+                decimal = 0.5
+            else:
+                decimal = 0
+            temperatura = float(int(temperatura) + decimal)
+            print("La temperatura no se encuentra en los estados establecidos con lo cual ha sido redondeada")
+
     except:
         print("La temperatura debe ser un flotante.")
 
@@ -140,7 +149,7 @@ def simular(temperatura,excepcion):
     if temperatura == 22.0:
         print("Se ha alcanzado la temperatura ideal.")
         return
-    if temperatura<16.0 or temperatura>25.0:
+    if not 16.0 < temperatura < 25.0:
         print("La temperatura no está en el rango del termostato por lo que ha dejado de funcionar.")
         return
     if ventana != 0:
