@@ -119,7 +119,7 @@ while not isinstance(temperatura, float):
             else:
                 decimal = 0
             temperatura = float(int(temperatura) + decimal)
-            print("La temperatura no se encuentra en los estados establecidos con lo cual ha sido redondeada")
+            print("La temperatura no se encuentra en los estados establecidos con lo cual ha sido redondeada.")
 
     except:
         print("La temperatura debe ser un flotante.")
@@ -155,11 +155,11 @@ def simular(temperatura,excepcion):
     if ventana != 0:
         if excepcion == "F" and temperatura >= 18:
             if rnd.random() < 0.05:
-                print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 2 grados")
+                print("Accidentalemnte se ha abirto una ventana y al hacer frío fuera, la temperatura a bajado 2 grados.")
                 temperatura -= 2
         if excepcion == "C" and temperatura <= 23:
             if rnd.random() < 0.05:
-                print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 2 grados")
+                print("Accidentalemnte se ha abirto una ventana y al hacer calor fuera, la temperatura a subido 2 grados.")
                 temperatura += 2
     estado = 0
     for i in range(len(politica)):
